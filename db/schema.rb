@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_27_135206) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_27_141205) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.string "status", default: "Pending"
+    t.bigint "user_id", null: false
+    t.bigint "game_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_bookings_on_game_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "name"
+    t.integer "players"
+    t.integer "minimum_age"
+    t.string "description"
+    t.string "city"
+    t.float "price_per_day"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_games_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,11 +48,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_135206) do
     t.string "first_name"
     t.string "last_name"
     t.string "username"
-    t.string "address"
+    t.string "city"
+    t.string "street_number"
+    t.integer "postal_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "games"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "games", "users"
 end
