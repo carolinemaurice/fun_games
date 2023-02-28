@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show edit update]
+  before_action :set_game, only: %i[show edit update destroy]
 
   def index
     @games = Game.all
@@ -24,6 +24,8 @@ class GamesController < ApplicationController
   end
 
   def destroy
+    @game.destroy
+    redirect_to games_path, status: :see_other
   end
 
   def edit
