@@ -2,15 +2,7 @@
   <div class="row">
     <div class="col">
       <h1>Edit this game</h1>
-        <%= simple_form_for [@game] do |f| %>
-          <%= f.input :name %>
-          <%= f.input :players %>
-          <%= f.input :minimum_age %>
-          <%= f.input :city %>
-          <%= f.input :price_per_day %>
-          <%= f.input :description %>
-          <%= f.submit "Confirm", class: "btn btn-primary" %>
-        <% end %>
+      <%= render "games/form" %>
     </div>
   </div>
 </div>
