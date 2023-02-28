@@ -1,16 +1,16 @@
-<%= form_with model: @game do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  <%= f.label :city %>
-  <%= f.text_field :city %>
-  <%= f.label :players %>
-  <%= f.number_field :players %>
-  <%= f.label :minimum_age %>
-  <%= f.number_field :minimum_age %>
-  <%= f.label :price_per_day %>
-  <%= f.number_field :price_per_day %>
-
-  <%= f.submit %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Edit this game</h1>
+        <%= simple_form_for [@game] do |f| %>
+          <%= f.input :name %>
+          <%= f.input :players %>
+          <%= f.input :minimum_age %>
+          <%= f.input :city %>
+          <%= f.input :price_per_day %>
+          <%= f.input :description %>
+          <%= f.submit "Edit game", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+  </div>
+</div>
