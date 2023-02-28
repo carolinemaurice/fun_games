@@ -1,8 +1,15 @@
-<div class="mx-3"><%= link_to "❌", game_path(@game), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-<%= link_to "edit this game", edit_game_path(@game)%> </div>
+<div class="mx-3">
+  <% if policy(@game).destroy? %>
+    <%= link_to "❌", game_path(@game), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+  <% end %>
+  <% if policy(@game).edit? %>
+    <%= link_to "edit this game", edit_game_path(@game)%>
+   <% end %>
+</div>
+
 <div class="container">
   <div class="row">
-  <div class="col-4">
+    <div class="col-4">
       <h2 > <%= @game.name%> </h2>
       <p> <em><%= @game.user.username %></em></p>
 

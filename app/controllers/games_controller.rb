@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
 
   def index
-    @games = Game.all
+    @games = policy_scope(Game)
   end
 
   def show
@@ -10,22 +10,19 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
+    authorize @game
   end
 
   def create
     @game = Game.new(game_params)
     user = User.find(1)
     @game.user = user
+    authorize @game
     if @game.save!
       redirect_to games_path
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    @game.destroy
-    redirect_to games_path, status: :see_other
   end
 
   def edit
@@ -39,6 +36,11 @@ class GamesController < ApplicationController
     end
   end
 
+  def destroy
+    @game.destroy
+    redirect_to games_path, status: :see_other
+  end
+
   private
 
   def game_params
@@ -47,5 +49,6 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.find(params[:id])
+    authorize @game
   end
 end
