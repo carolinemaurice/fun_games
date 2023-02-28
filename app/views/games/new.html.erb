@@ -9,6 +9,7 @@
           <%= f.input :city %>
           <%= f.input :price_per_day %>
           <%= f.input :description %>
+          <%= f.input :photos, as: :file, input_html: { multiple: true } %>
           <%= f.submit "Create game", class: "btn btn-primary" %>
         <% end %>
     </div>
