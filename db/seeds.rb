@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-
 owner = User.create!(first_name: "Tom", last_name: "Lewis", email: "tom.lewis@test.com", password: "azerty", username: "tom_lewis", city: "Toulouse", street_number: "39 allée Jules Guedes", postal_code: "31000")
 User.create!(first_name: "Michel", last_name: "Baillard", email: "michel.baillard@test.com", password: "azerty", username: "michel_b", city: "Blagnac", street_number: "20 place centrale", postal_code: "31700")
 
