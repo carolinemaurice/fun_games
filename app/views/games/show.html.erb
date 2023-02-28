@@ -1,2 +1,13 @@
-<h1>Games#show</h1>
-<p>Find me in app/views/games/show.html.erb</p>
+<div class="container">
+  <div class="row">
+  <div class="col-3">
+      <h1 >Games#show</h1>
+
+      <h2><%= game.name %></h2>
+
+      <h3> <%= game.city %> <%= game.price_per_day %></h3>
+      <p> <%= game.players %> <%= game.minimum_age %></p>
+      <p> <%= game.description %></p>
+    </div>
+  </div>
+</div>
