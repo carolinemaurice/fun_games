@@ -1,2 +1,16 @@
-<h1>Games#new</h1>
-<p>Find me in app/views/games/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>New games</h1>
+        <%= simple_form_for [@game] do |f| %>
+          <%= f.input :name %>
+          <%= f.input :players %>
+          <%= f.input :minimum_age %>
+          <%= f.input :city %>
+          <%= f.input :price_per_day %>
+          <%= f.input :description %>
+          <%= f.submit "Create game", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+  </div>
+</div>
