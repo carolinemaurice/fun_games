@@ -1,16 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1>New games</h1>
-        <%= simple_form_for [@game] do |f| %>
-          <%= f.input :name %>
-          <%= f.input :players %>
-          <%= f.input :minimum_age %>
-          <%= f.input :city %>
-          <%= f.input :price_per_day %>
-          <%= f.input :description %>
-          <%= f.submit "Create game", class: "btn btn-primary" %>
-        <% end %>
+      <h1>New game</h1>
+      <%= render "games/form" %>
     </div>
   </div>
 </div>

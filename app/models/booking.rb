@@ -6,5 +6,5 @@ class Booking < ApplicationRecord
 
   validates :status, inclusion: { in: STATUS }
   validates :start_date, :end_date, presence: true
-  validates :start_date, comparison: { greater_than: :end_date }
+  validates :end_date, comparison: { greater_than: :start_date }
 end

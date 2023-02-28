@@ -16,6 +16,8 @@
       <h5> <strong><%= @game.city %> | <%=@game.price_per_day %> euros per day</strong> </h5>
       <p> Minimum players : <%= @game.players %> | Minimum age : <%=@game.minimum_age %> years old</p>
       <p> <%=@game.description %></p>
+
+      <%= cl_image_tag @game.photos[0].key, height: 300, width: 400, crop: :fill %>
     </div>
   </div>
 </div>
