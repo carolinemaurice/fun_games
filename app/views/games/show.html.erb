@@ -5,6 +5,7 @@
   <% if policy(@game).edit? %>
     <%= link_to "edit this game", edit_game_path(@game)%>
    <% end %>
+  <%= link_to "book this game", new_game_booking_path(@game) if @game.user != current_user %>
 </div>
 
 <div class="container">
