@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :set_game, only: %i[new create]
 
   def new
-    @booking = Booking.new
+    @booking = Booking.new(game: @game)
     authorize @booking
   end
 
