@@ -12,3 +12,15 @@
 .sub_section h3 {
   text-align: center;
 }
+
+.status_pending {
+  color: orange;
+}
+
+.status_declined {
+  color: red;
+}
+
+.status_accepted {
+  color: green;
+}

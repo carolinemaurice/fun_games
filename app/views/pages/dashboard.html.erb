@@ -19,19 +19,40 @@
   <div class="col-9">
     <div class="sub_section">
       <h3>My games</h3>
-      <ul>
+      <div class="row">
         <% @games.each do |game| %>
-          <li><%= link_to game.name, game_path(game) %></li>
+          <div class="col-3">
+            <div class="card m-2 ">
+              <%= cl_image_tag game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
+              <div class="card-body">
+                <h5 class="card-title fw-semibold"><%= game.name %></h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <%= link_to 'More details', game_path(game), class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </ul>
+      </div>
     </div>
+
     <div class="sub_section">
       <h3>My reservations</h3>
-      <ul>
+      <div class="row">
         <% @bookings.each do |booking| %>
-          <li> <%= booking.game.name %> - From <%= booking.start_date %> to <%= booking.end_date %></li>
+          <div class="col-3">
+            <div class="card m-2 ">
+              <%= cl_image_tag booking.game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
+              <div class="card-body">
+                <h5 class="card-title fw-semibold"><%= booking.game.name %></h5>
+                <p class="card-text"><strong>Owner's game : </strong> <%= booking.game.user.username %> </p>
+                <p class="card-text"><strong>Period of reservation : </strong></p>
+                <p class="card-text">From <%= booking.start_date %> to <%= booking.end_date %></p>
+                <p class="card-text"><strong>Status : </strong> <span class="status_pending"><%= booking.status %></span> </p>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </ul>
+      </div>
     </div>
   </div>
 
