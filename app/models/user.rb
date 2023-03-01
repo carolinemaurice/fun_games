@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bookings
-  has_many :games, through: :bookings
+  has_many :games
 
   validates :first_name, :last_name, :username, :city, :street_number, :postal_code, :email, presence: true
   validates :email, format: {with: /\A.+@[a-z]+\.[a-z]{2,3}\z/ }
