@@ -15,29 +15,30 @@ User.create(first_name: "Michel", last_name: "Baillard", email: "michel.baillard
 
 games_attr = [
   {
-    attributes: { name: "Catan", city: "Toulouse", price_per_day: 5, minimum_age: 8, players: 4, description: "game of management and strategy" },
+    attributes: { name: "Catan", address: "14 rue louis plana, Toulouse", price_per_day: 5, minimum_age: 8, players: 4, description: "game of management and strategy" },
     photo: "http://dungeonmarvels.com/25055-large_default/los-colonos-de-catan.jpg"
   },
   {
-    attributes: { name: "Uno", city: "Bordeaux", price_per_day: 3, minimum_age: 5, players: 8, description: "game of cards" },
+    attributes: { name: "Uno", address: "place du capitole, Toulouse", price_per_day: 3, minimum_age: 5, players: 8, description: "game of cards" },
     photo: "https://cdn.playtherapysupply.com/img/f/b799cadd80a5.jpg"
   },
   {
-    attributes: { name: "Perudo", city: "Toulouse", price_per_day: 4, minimum_age: 6, players: 6, description: "similar to poker with dices" },
+    attributes: { name: "Perudo", address: "rue de la colombette, Toulouse", price_per_day: 4, minimum_age: 6, players: 6, description: "similar to poker with dices" },
     photo: "http://www.jeuxdenim.be/images/jeux/Perudo_large01.jpg"
   },
   {
-    attributes: { name: "Monopoly", city: "Paris", price_per_day: 8, minimum_age: 7, players: 4, description: "very popular" },
+    attributes: { name: "Monopoly", address: "place des carmes, toulouse", price_per_day: 8, minimum_age: 7, players: 4, description: "very popular" },
     photo: "https://isolationmuseum.com/wp-content/uploads/2020/04/IMG_8200-scaled.jpg"
   }
 ]
 
 games_attr.each do |game_attr|
+  sleep(1)
   game = Game.new(game_attr[:attributes])
   game.user = owner
   file = URI.open(game_attr[:photo])
   game.photos.attach(io: file, filename: "#{game_attr[:attributes][:name]}.jpg", content_type: "photo.jpg")
-  game.save
+  game.save!
 end
 
 puts "Import in database finished"
