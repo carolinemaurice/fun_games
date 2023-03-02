@@ -6,7 +6,8 @@ class PagesController < ApplicationController
     @markers = @games.map do |game|
       {
         lat: game.latitude,
-        lng: game.longitude
+        lng: game.longitude,
+        info_window_html: render_to_string(partial: "games/info_window", locals: {game: game})
       }
     end
   end
