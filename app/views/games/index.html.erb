@@ -1,6 +1,7 @@
 <div class="container">
   <h1 class="text-center m-2 p-4 fw-bold">Discover all games</h1>
   <div class="row">
+    <%= render "games/search_form" %>
     <% @games.each do |game| %>
       <div class="col-3">
         <div class="card m-2 ">
