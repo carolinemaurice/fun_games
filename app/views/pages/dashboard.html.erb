@@ -6,6 +6,13 @@
 
   <div class="col-3 sub_section">
     <h3>My account</h3>
+    <div class="d-flex justify-content-center">
+      <% if current_user.photo.key %>
+        <%= cl_image_tag current_user.photo.key, height: 200, width: 200, crop: :fill, radius: :max %>
+      <% else %>
+        <%= image_tag "default_avatar.jpg", height: 200, width: 200, crop: :fill, radius: :max %>
+      <% end %>
+    </div>
     <div class="my-3">
       <p><strong>Name: </strong><%= current_user.first_name %> <%= current_user.last_name %></p>
       <p><strong>Username: </strong><%= current_user.username %></p>
@@ -48,6 +55,7 @@
                 <p class="card-text"><strong>Period of reservation : </strong></p>
                 <p class="card-text">From <%= booking.start_date %> to <%= booking.end_date %></p>
                 <p class="card-text"><strong>Status : </strong> <span class="status_pending"><%= booking.status %></span> </p>
+                <%= link_to 'Cancel my reservation', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
               </div>
             </div>
           </div>
