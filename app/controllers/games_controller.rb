@@ -15,6 +15,8 @@ class GamesController < ApplicationController
       lat: @game.latitude,
       lng: @game.longitude
     }]
+    @upcoming_bookings = @game.bookings.where(status: "Accepted")
+    @declined_bookings = @game.bookings.where(status: "Declined")
   end
 
   def new

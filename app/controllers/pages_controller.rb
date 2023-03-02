@@ -7,5 +7,8 @@ class PagesController < ApplicationController
   def dashboard
     @games = current_user.games
     @bookings = current_user.bookings
+    @pendings_bookings_as_owner = current_user.bookings_as_owner.pendings
+    @accepteds_bookings_as_owner = current_user.bookings_as_owner.accepteds
+    @declineds_bookings_as_owner = current_user.bookings_as_owner.declineds
   end
 end
