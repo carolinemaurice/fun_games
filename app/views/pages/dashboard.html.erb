@@ -6,6 +6,13 @@
 
   <div class="col-3 sub_section">
     <h3>My account</h3>
+    <div class="d-flex justify-content-center">
+      <% if current_user.photo.key %>
+        <%= cl_image_tag current_user.photo.key, height: 200, width: 200, crop: :fill, radius: :max %>
+      <% else %>
+        <%= image_tag "default_avatar.jpg", height: 200, width: 200, crop: :fill, radius: :max %>
+      <% end %>
+    </div>
     <div class="my-3">
       <p><strong>Name: </strong><%= current_user.first_name %> <%= current_user.last_name %></p>
       <p><strong>Username: </strong><%= current_user.username %></p>
