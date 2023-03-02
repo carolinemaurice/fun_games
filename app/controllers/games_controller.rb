@@ -3,7 +3,11 @@ class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
 
   def index
-    @games = policy_scope(Game)
+    if params[:query].present? || params[:address].present?
+      @games = policy_scope(Game).search_by_name_and_address("#{params[:query]} #{params[:address]}")
+    else
+      @games = policy_scope(Game)
+    end
   end
 
   def show
