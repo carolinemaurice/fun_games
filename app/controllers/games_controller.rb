@@ -11,6 +11,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    @booking = Booking.new
     @markers = [{
       lat: @game.latitude,
       lng: @game.longitude
