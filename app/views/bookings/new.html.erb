@@ -1,6 +1,45 @@
-<h1>Book this game</h1>
-<%= simple_form_for [@game, @booking] do |f| %>
-  <%= f.input :start_date, as: :date%>
-  <%= f.input :end_date, as: :date%>
-  <%= f.submit "Confirm booking", class: "btn btn-primary" %>
-<% end %>
+<div class="container d-flex justify-content-center">
+  <div class="row">
+    <div class="col-12 m-auto ">
+      <h1 class= my-2>Book this game</h1>
+      <div data-controller="dynamic-booking-price"
+          data-dynamic-booking-price-price-value="<%= @game.price_per_day %>">
+
+      <span data-dynamic-booking-price-target="dates"></span>
+      <i class="fa-solid fa-calendar-days" data-action="click->dynamic-booking-price#openCalendar"></i>
+      <%= simple_form_for [@game, @booking], html: {
+                            data: {
+                              controller: 'flatpickr'
+                            }
+                          } do |f| %>
+        <%= f.input :start_date,
+                    as: :string,
+                    label: false,
+                    input_html: {
+                      class: 'd-none',
+                      data: {
+                        flatpickr_target: 'startDateInput',
+                        dynamic_booking_price_target: 'startDateInput',
+                        action: 'change->dynamic-booking-price#updatePrice'
+                      }
+                    } %>
+        <%= f.input :end_date,
+                    as: :string,
+                    label: false,
+                    input_html: {
+                      class: 'd-none',
+                      data: {
+                        flatpickr_target: 'endDateInput',
+                        dynamic_booking_price_target: 'endDateInput',
+                        action: 'change->dynamic-booking-price#updatePrice'
+                      }
+                    } %>
+        <p class="m-auto">
+          Total price: <span data-dynamic-booking-price-target="priceHolder"><%= @game.price_per_day %></span> €
+        </p>
+        <%= f.submit "Book now", class: "btn btn-primary my-3" %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
