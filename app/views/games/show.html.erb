@@ -1,7 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-6 d-flex flex-column my-3">
-      <%= cl_image_tag @game.photos[0].key, height: 300, width: 500, crop: :fill, class: "my-3"%>
+      <!--<%= cl_image_tag @game.photos[0].key, height: 300, width: 500, crop: :fill, class: "my-3"%>-->
+      <div style="height: 300px; width: 500px;">
+        <%= render "games/carroussel", game: @game %>
+      </div>
       <div class= "my-3">
         <h2 > <%= @game.name%></h2>
         <h5> <strong> <%= @game.address %> | <%=@game.price_per_day %> euros per day</strong> </h5>
