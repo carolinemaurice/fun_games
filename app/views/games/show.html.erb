@@ -21,12 +21,11 @@
         <% end %>
         <%= link_to("Book this game",  new_game_booking_path(@game), class: "button btn-secondary") if @game.user != current_user %>
       </div>
-      </div>
-
+    </div>
 
       <div class="col-6 d-flex flex-column my-3">
-        <h1 class= "my-3" >Upcoming reservations</h1>
         <% if current_user == @game.user%>
+          <h1 class= "my-3" >Upcoming reservations</h1>
           <% if @upcoming_bookings.empty? %>
             <div class="card-product">
               <h6>You have no upcoming bookings for now!</h6>
@@ -64,9 +63,9 @@
               </div>
             <% end %>
           <% end %>
-  </div>
+      </div>
       <% else %>
-        <div  class="col-6 d-flex flex-column" style="width: 50%; height: 600px;"
+        <div  class="col-6 d-flex flex-column" style="width: 100%; height: 600px;"
           data-controller="map"
           data-map-markers-value="<%= @markers.to_json %>"
           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
