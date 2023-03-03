@@ -11,19 +11,26 @@
   text-justify: auto;
 }
 
-.button:hover {
-  color:#4800E2;
-  background-color: #E7E2F2;
-  border: 1px solid #4800E2;
-}
-
 .btn-primary {
   background: #4800E2;
   // border: 1px solid #E7E2F2;
 }
 
+.btn-primary:hover {
+  color:#4800E2;
+  background-color: #E7E2F2;
+  border: 1px solid #4800E2;
+}
+
 .btn-secondary {
   background: #A387DE;
+  border: 1px solid #4800E2;
+  border-radius: 5px;
+}
+
+.btn-secondary:hover {
+  color:#4800E2;
+  background: #E7E2F2;
   border: 1px solid #4800E2;
 }
 

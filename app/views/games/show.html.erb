@@ -1,30 +1,31 @@
-<div class="mx-3">
-  <% if policy(@game).destroy? %>
-    <%= link_to "❌", game_path(@game), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
-  <% end %>
-  <% if policy(@game).edit? %>
-    <%= link_to "edit this game", edit_game_path(@game)%>
-   <% end %>
-  <%= link_to "book this game", new_game_booking_path(@game) if @game.user != current_user %>
-</div>
-
 <div class="container">
-  <div class="row">
-    <div class="col-6 d-flex flex-column">
-      <h2 > <%= @game.name%> </h2>
-      <p> <em><%= @game.user.username %></em></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 d-flex flex-column my-5">
+        <%= cl_image_tag @game.photos[0].key, height: 300, width: 500, crop: :fill, class: "my-3"%>
+        <div class= "my-3">
+          <h2 > <%= @game.name%></h2>
+          <h5> <strong> <%= @game.address %> | <%=@game.price_per_day %> euros per day</strong> </h5>
+          <p> <%= @game.user.username %></p>
+          <p> Minimum players : <%= @game.players %> | Minimum age : <%=@game.minimum_age %> years old</p>
+          <p> Description : <%=@game.description %></p>
+        </div>
+        <div class="my-3">
+          <% if policy(@game).edit? %>
+            <%= link_to "Edit this game", edit_game_path(@game), class: "button btn-secondary"%>
+          <% end %>
+          <% if policy(@game).destroy? %>
+            <%= link_to "Remove", game_path(@game), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "button btn-secondary"%>
+          <% end %>
+          <%= link_to("Book this game",  new_game_booking_path(@game), class: "button btn-secondary") if @game.user != current_user %>
+        </div>
+      </div>
 
-      <h5> <strong><%= @game.address %> | <%=@game.price_per_day %> euros per day</strong> </h5>
-      <p> Minimum players : <%= @game.players %> | Minimum age : <%=@game.minimum_age %> years old</p>
-      <p> <%=@game.description %></p>
-
-      <%= cl_image_tag @game.photos[0].key, height: 300, width: 400, crop: :fill %>
+      <div  class="col-6 d-flex flex-column my-5 p-5" style="width: 50%; height: 600px;"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
     </div>
-    <div  class="col-6 d-flex flex-column" style="width: 50%; height: 400px;"
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-    </div>
-
   </div>
 </div>
