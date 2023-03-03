@@ -58,7 +58,7 @@ puts "Michou created"
   user = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    email: "#{Faker::Name.first_name}_#{Faker::Name.last_name}@test.com",
+    email: "#{Faker::Name.first_name.underscore}_#{Faker::Name.last_name.underscore}@test.com",
     password: "azerty",
     username: "#{Faker::Name.first_name}_#{Faker::Name.last_name}",
     city: new_address[:city],
