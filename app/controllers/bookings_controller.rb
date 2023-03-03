@@ -25,6 +25,23 @@ class BookingsController < ApplicationController
     redirect_to dashboard_path, status: :see_other
   end
 
+  def accept
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    @booking.status = "Accepted"
+    @booking.save
+    redirect_to dashboard_path
+  end
+
+  def decline
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    @booking.status = "Declined"
+    @booking.save
+    redirect_to dashboard_path
+  end
+
+
   private
 
   def booking_params

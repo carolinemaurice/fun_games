@@ -20,11 +20,38 @@
 
       <%= cl_image_tag @game.photos[0].key, height: 300, width: 400, crop: :fill %>
     </div>
+    <div class="col-6 d-flex flex-column">
+      <% if current_user == @game.user%>
+          <% @upcoming_bookings.each do |booking| %>
+            <h1>Upcoming reservations</h1>
+            <div class="card-product">
+              <%= image_tag user_avatar(booking.user), class: 'avatar' %>
+              <div class="card-product-infos">
+                <p> Booked <%= (booking.end_date - booking.start_date).to_i %> days by <%=booking.user.username%></p>
+                <p> From <%= booking.start_date %> to <%= booking.end_date %></p>
+                <p><%=(booking.end_date - booking.start_date).to_i * booking.game.price_per_day %>€</p>
+              </div>
+            </div>
+          <% end %>
+          <% @declined_bookings.each do |booking| %>
+            <h1>Declined reservations</h1>
+            <div class="card-product">
+              <%= image_tag user_avatar(booking.user), class: 'avatar' %>
+              <div class="card-product-infos">
+                <p> Booked <%= (booking.end_date - booking.start_date).to_i %> days by <%=booking.user.username%></p>
+                <p> From <%= booking.start_date %> to <%= booking.end_date %></p>
+                <p><%=(booking.end_date - booking.start_date).to_i * booking.game.price_per_day %>€</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  </div>
+    <% else %>
     <div  class="col-6 d-flex flex-column" style="width: 50%; height: 400px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
-
-  </div>
+    <% end %>
 </div>
