@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     authorize @booking
     if @booking.save
-      redirect_to game_path(@game), notice: "you have booked the game #{@game.name} on #{@booking.start_date} to #{@booking.end_date}."
+      redirect_to game_path(@game), notice: "You have booked the game #{@game.name} on #{@booking.start_date} to #{@booking.end_date}."
     else
       render :new, status: :unprocessable_entity
     end
