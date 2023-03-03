@@ -1,65 +1,103 @@
 <div class="container">
-  <h1>Profile</h1>
-</div>
+  <h1 class="text-center">Profile</h1>
 
-<div class="main_section row">
+  <div class="row">
 
-  <div class="col-3 sub_section">
-    <h3>My account</h3>
-    <div class="d-flex justify-content-center">
+    <div class="col-2 sub_section d-flex flex-column justify-content-start align-items-center">
+      <h3>My account</h3>
       <% if current_user.photo.key %>
         <%= cl_image_tag current_user.photo.key, height: 200, width: 200, crop: :fill, radius: :max %>
       <% else %>
         <%= image_tag "default_avatar.jpg", height: 200, width: 200, crop: :fill, radius: :max %>
       <% end %>
-    </div>
-    <div class="my-3">
-      <p><strong>Name: </strong><%= current_user.first_name %> <%= current_user.last_name %></p>
-      <p><strong>Username: </strong><%= current_user.username %></p>
-      <p><strong>Address: </strong></p>
-      <p><%= current_user.street_number %></p>
-      <p><%= current_user.postal_code %> <%= current_user.city %></p>
-    </div>
-    <%= link_to "Edit my account", edit_user_registration_path %>
-  </div>
-
-  <div class="col-9">
-  <div class="sub_section">
-      <h3>Reservations requests</h3>
-      <div class="row">
-        <% @pendings_bookings_as_owner.each do |booking| %>
-          <div class="col-3">
-            <div class="card m-2 ">
-              <%= cl_image_tag booking.game.photos.first.key, class: 'card-img-top image-fit', height: 200, width: 300, crop: :fill  %>
-              <div class="card-body">
-                <h5 class="card-title fw-semibold"><%= booking.game.name %></h5>
-                <p>From <%=booking.start_date %></p>
-                <p>To <%=booking.end_date %></p>
-                <p>Booked by <%=booking.user.username %></p>
-                <p><%= (booking.end_date - booking.start_date).to_i * booking.game.price_per_day %> €</p>
-                <%= link_to "Accept", accept_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"Accept this reservation?"} %>
-                <%= link_to "Decline", decline_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"Decline this reservation ?"} %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+      <div class="my-3">
+        <p><strong>Name: </strong><%= current_user.first_name %> <%= current_user.last_name %></p>
+        <p><strong>Username: </strong><%= current_user.username %></p>
+        <p><strong>Address: </strong></p>
+        <p><%= current_user.street_number %></p>
+        <p><%= current_user.postal_code %> <%= current_user.city %></p>
       </div>
+      <%= link_to "Edit my account", edit_user_registration_path, class: "button  btn-tertiary" %>
     </div>
-    <div class="sub_section">
-      <h3>My games</h3>
-      <div class="row">
-        <% @games.each do |game| %>
-          <div class="col-3">
-            <div class="card m-2 ">
-              <%= cl_image_tag game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
-              <div class="card-body">
-                <h5 class="card-title fw-semibold"><%= game.name %></h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <%= link_to 'More details', game_path(game), class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
+    <div class="col-10">
+      <div class="sub_section">
+        <h3>Reservations requests</h3>
+        <div class="row">
+          <% if @pendings_bookings_as_owner.empty? %>
+            <h6>You have not reservations requests for now!</h6>
+          <% else %>
+            <% @pendings_bookings_as_owner.each do |booking| %>
+              <div class="col-4">
+                <div class="card m-2 ">
+                  <%= cl_image_tag booking.game.photos.first.key, class: 'card-img-top image-fit', height: 200, width: 300, crop: :fill  %>
+                  <div class="card-body">
+                    <h5 class="card-title fw-semibold"><%= booking.game.name %></h5>
+                    <p>From <%=booking.start_date %></p>
+                    <p>To <%=booking.end_date %></p>
+                    <p>Booked by <%=booking.user.username %></p>
+                    <p><%= (booking.end_date - booking.start_date).to_i * booking.game.price_per_day %> €</p>
+                    <%= link_to "Accept", accept_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"Accept this reservation?"} %>
+                    <%= link_to "Decline", decline_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"Decline this reservation ?"} %>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="sub_section">
+        <h3>My games</h3>
+        <div class="row">
+          <% if @games.empty? %>
+            <h6>You have not games for now!</h6>
+          <% else %>
+            <% @games.each do |game| %>
+              <div class="col-4">
+                <div class="card m-2 ">
+                  <%= cl_image_tag game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
+                  <div class="card-body">
+                    <h5 class="card-title fw-semibold"><%= game.name %></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <%= link_to 'More details', game_path(game), class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="sub_section">
+        <h3>My reservations</h3>
+        <div class="row">
+          <% if @bookings.empty? %>
+            <h6>You have not reservations for now!</h6>
+          <% else %>
+            <% @bookings.each do |booking| %>
+              <div class="col-4">
+                <div class="card m-2 ">
+                  <%= cl_image_tag booking.game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
+                  <div class="card-body">
+                    <h5 class="card-title fw-semibold"><%= booking.game.name %></h5>
+                    <p class="card-text"><strong>Owner's game : </strong> <%= booking.game.user.username %> </p>
+                    <p class="card-text"><strong>Period of reservation : </strong></p>
+                    <p class="card-text">From <%= booking.start_date %> to <%= booking.end_date %></p>
+                    <% if booking.status == "Declined" %>
+                      <p class="card-text"><strong>Status : </strong> <span class="status_declined"><%= booking.status %></span> </p>
+                      <%= link_to 'Remove my reservation', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
+                    <% else  %>
+                      <% if booking.status == "Pending" %>
+                        <p class="card-text"><strong>Status : </strong> <span class="status_pending"><%= booking.status %></span> </p>
+                      <% else %>
+                        <p class="card-text"><strong>Status : </strong> <span class="status_accepted"><%= booking.status %></span> </p>
+                      <% end %>
+                      <%= link_to 'Cancel my reservation', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
 
@@ -76,17 +114,14 @@
                 <p class="card-text"><strong>Period of reservation : </strong></p>
                 <p class="card-text">From <%= booking.start_date %> to <%= booking.end_date %></p>
                 <p class="card-text"><strong>Status : </strong> <span class="status_pending"><%= booking.status %></span> </p>
-                <% if booking.status == "Declined" %>
-                <%= link_to 'Remove my reservation', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
-                <% else  %>
-                <%= link_to 'Cancel my reservation', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
-                <% end %>
+                <%= link_to 'Cancel my reservation', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'button  btn-outline-info d-flex text-center justify-content-center' %>
               </div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
+
   </div>
 
 </div>
