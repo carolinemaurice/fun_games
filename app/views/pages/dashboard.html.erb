@@ -24,7 +24,7 @@
         <h3 class="my-3">Pending Bookings : time to make your decision</h3>
         <div class="row">
           <% if @pendings_bookings_as_owner.empty? %>
-            <h6>You have not reservations requests for now!</h6>
+            <h6>You have no reservations requests for now!</h6>
           <% else %>
             <% @pendings_bookings_as_owner.each do |booking| %>
               <div class="col-4">
@@ -53,7 +53,7 @@
         <h3 class="my-3">Your Games : are they ready to be booked ?</h3>
         <div class="row">
           <% if @games.empty? %>
-            <h6>You have not games for now!</h6>
+            <h6>You have no games for now!</h6>
           <% else %>
             <% @games.each do |game| %>
               <div class="col-4">
@@ -74,7 +74,7 @@
         <h3 class="my-3">Your Bookings : let's play !</h3>
         <div class="row">
           <% if @bookings.empty? %>
-            <h6>You have not booked anything yet ! Let's start and play.</h6>
+            <h6>You have no bookings yet ! Let's start and play.</h6>
           <% else %>
             <% @bookings.each do |booking| %>
               <div class="col-4">
