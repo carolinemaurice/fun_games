@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
   include PgSearch::Model
+  include GameConcern
   pg_search_scope :search_by_name_and_address,
                   against: %i[name address],
                   using: {
