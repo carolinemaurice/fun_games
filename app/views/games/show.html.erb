@@ -21,9 +21,14 @@
       <%= cl_image_tag @game.photos[0].key, height: 300, width: 400, crop: :fill %>
     </div>
     <div class="col-6 d-flex flex-column">
+      <h1>Upcoming reservations</h1>
       <% if current_user == @game.user%>
+        <% if @upcoming_bookings.empty? %>
+          <div class="card-product">
+            <h6>You have not upcoming booking for now!</h6>
+          </div>
+        <% else %>
           <% @upcoming_bookings.each do |booking| %>
-            <h1>Upcoming reservations</h1>
             <div class="card-product">
               <%= image_tag user_avatar(booking.user), class: 'avatar' %>
               <div class="card-product-infos">
@@ -33,8 +38,14 @@
               </div>
             </div>
           <% end %>
+        <% end %>
+        <h1>Declined reservations</h1>
+        <% if @declined_bookings.empty? %>
+          <div class="card-product">
+            <h6>You have not declined booking for now!</h6>
+          </div>
+        <% else %>
           <% @declined_bookings.each do |booking| %>
-            <h1>Declined reservations</h1>
             <div class="card-product">
               <%= image_tag user_avatar(booking.user), class: 'avatar' %>
               <div class="card-product-infos">
@@ -44,14 +55,14 @@
               </div>
             </div>
           <% end %>
+        <% end %>
+      <% else %>
+        <div  class="col-6 d-flex flex-column" style="width: 50%; height: 400px;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
         </div>
-      </div>
-  </div>
-    <% else %>
-    <div  class="col-6 d-flex flex-column" style="width: 50%; height: 400px;"
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      <% end %>
     </div>
-    <% end %>
+  </div>
 </div>
