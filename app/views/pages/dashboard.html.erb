@@ -37,8 +37,8 @@
                 <p>To <%=booking.end_date %></p>
                 <p>Booked by <%=booking.user.username %></p>
                 <p><%= (booking.end_date - booking.start_date).to_i * booking.game.price_per_day %> €</p>
-                <%= link_to "Accept", accept_booking_path(booking), data: {turbo_method: :patch} %>
-                <%= link_to "Decline", decline_booking_path(booking), data: {turbo_method: :patch} %>
+                <%= link_to "Accept", accept_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"Accept this reservation?"} %>
+                <%= link_to "Decline", decline_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"Decline this reservation ?"} %>
               </div>
             </div>
           </div>

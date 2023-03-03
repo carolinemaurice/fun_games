@@ -22,25 +22,29 @@
     </div>
     <div class="col-6 d-flex flex-column">
       <% if current_user == @game.user%>
-          <% @upcoming_bookings.each do |booking| %>
             <h1>Upcoming reservations</h1>
+          <% @upcoming_bookings.each do |booking| %>
             <div class="card-product">
               <%= image_tag user_avatar(booking.user), class: 'avatar' %>
-              <div class="card-product-infos">
+              <div class="card-product-infos position-relative">
+              <i class="fa-regular fa-circle-check booking-check"></i>
                 <p> Booked <%= (booking.end_date - booking.start_date).to_i %> days by <%=booking.user.username%></p>
                 <p> From <%= booking.start_date %> to <%= booking.end_date %></p>
                 <p><%=(booking.end_date - booking.start_date).to_i * booking.game.price_per_day %>€</p>
+                <p>Confirmed</p>
               </div>
             </div>
           <% end %>
-          <% @declined_bookings.each do |booking| %>
-            <h1>Declined reservations</h1>
+            <h1>Reservations history</h1>
+          <% @history_bookings.each do |booking| %>
             <div class="card-product">
               <%= image_tag user_avatar(booking.user), class: 'avatar' %>
-              <div class="card-product-infos">
+              <div class="card-product-infos position-relative">
+            <i class="fa-regular fa-circle-xmark booking-done"></i>
                 <p> Booked <%= (booking.end_date - booking.start_date).to_i %> days by <%=booking.user.username%></p>
                 <p> From <%= booking.start_date %> to <%= booking.end_date %></p>
                 <p><%=(booking.end_date - booking.start_date).to_i * booking.game.price_per_day %>€</p>
+                <p>Declined</p>
               </div>
             </div>
           <% end %>

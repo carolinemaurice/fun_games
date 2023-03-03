@@ -30,3 +30,17 @@
 .card-product .card-product-infos {
   padding: 16px;
 }
+
+.booking-check {
+  position:absolute;
+  bottom: 1.5rem;
+  right: 0.5rem;
+  color: green;
+}
+
+.booking-done {
+  position:absolute;
+  bottom: 1.5rem;
+  right: 0.5rem;
+  color: red;
+}
