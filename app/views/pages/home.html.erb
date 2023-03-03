@@ -3,7 +3,7 @@
     <h1>Ready to share your favorites games and play ?</h1>
     <h3>Create your offers or book a game directly.</h3>
     <div class="d-flex justify-content-center">
-      <%=link_to "Let's start ! ", games_path, class: 'button btn-primary my-3'%>
+      <%=link_to "Let's start ! ", games_path, class: 'button btn-primary my-5'%>
     </div>
   </div>
 </div>
@@ -14,7 +14,7 @@
       <div class="my-5">
         <%= render "games/search_form" %>
       </div>
-      <h3> Have a look at the newest games !</h3>
+      <h3 class="my-3"> Have a look at the most games !</h3>
       <div style="width: 100%; height: 600px;"
         data-controller="map"
         data-map-markers-value="<%= @markers.to_json %>"
@@ -23,3 +23,4 @@
     </div>
   </div>
 </div>
+s
