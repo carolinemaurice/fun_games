@@ -38,5 +38,11 @@
 .btn-tertiary {
   background: #E7E2F2;
   border: 1px solid #4800E2;
-  color: #A387DE
+  color: #4800E2
+}
+
+.btn-tertiary:hover {
+  background: #A387DE;
+  border: 1px solid #4800E2;
+  color:  #E7E2F2
 }
