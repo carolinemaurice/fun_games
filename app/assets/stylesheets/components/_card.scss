@@ -8,8 +8,11 @@
 }
 
 .card-product img {
-  height: 100%;
-  width: 120px;
+  height: 94%;
+  width: 110px;
+  border-radius: 50%;
+  border: 1px solid rgb(139, 138, 138);
+  margin: 3% 3px 3% 3px;
   object-fit: cover;
 }
 
