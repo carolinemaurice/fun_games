@@ -10,8 +10,8 @@ puts "Database cleaning..."
 Game.destroy_all
 User.destroy_all
 
-puts "Create users..."
 
+puts "Create users..."
 address = [
   { street_number: "61 rue Pomme", postal_code: 31000, city: "Toulouse" },
   { street_number: "41 impasse Flambère", postal_code: 31300, city: "Toulouse" },
@@ -39,6 +39,7 @@ User.create!(
   street_number: new_address[:street_number],
   postal_code: new_address[:postal_code]
 )
+puts "Tom Lewis created"
 new_address = address.sample
 User.create!(
   first_name: "Michel",
@@ -50,6 +51,7 @@ User.create!(
   street_number: new_address[:street_number],
   postal_code: new_address[:postal_code]
 )
+puts "Michou created"
 20.times do
   sleep(1)
   new_address = address.sample
@@ -65,6 +67,7 @@ User.create!(
   )
   file = URI.open(Faker::Avatar.image)
   user.photo.attach(io: file, filename: "#{user.first_name}.png", content_type: "photo.png")
+  puts "#{user.first_name} #{user.last_name} created"
 end
 
 puts "Create games..."
@@ -90,18 +93,19 @@ games = [
   user = User.all.sample
   game = games.sample
   attributes = { name: game[:name],
-                 address: "#{user.street_number} #{user.postal_code} #{user.city}",
-                 price_per_day: price_per_days.sample,
-                 minimum_age: minimum_ages.sample,
-                 players: game[:players],
-                 description: game[:description]
-               }
+    address: "#{user.street_number} #{user.postal_code} #{user.city}",
+    price_per_day: price_per_days.sample,
+    minimum_age: minimum_ages.sample,
+    players: game[:players],
+    description: game[:description]
+  }
   photo = game[:photo]
   new_game = Game.new(attributes)
   new_game.user = user
   file = URI.open(photo)
   new_game.photos.attach(io: file, filename: "#{game[:name]}.jpg", content_type: "photo.jpg")
   new_game.save!
+  puts "#{new_game.name} created"
 end
 
 puts "Create bookings..."
@@ -117,6 +121,7 @@ puts "Create bookings..."
     booking.user = user
     booking.game = game
     booking.save!
+    puts "Booking of #{booking.user.first_name} #{booking.user.last_name} on #{booking.game.name} created"
   end
 end
 
