@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="text-center my-3">Profile</h1>
+  <h1 class="text-center my-3 fw-bold">Profile</h1>
 
   <div class="row">
 
@@ -17,7 +17,7 @@
         <p><%= current_user.street_number %></p>
         <p><%= current_user.postal_code %> <%= current_user.city %></p>
       </div>
-      <%= link_to "Edit my account", edit_user_registration_path, class: "button  btn-tertiary" %>
+      <%= link_to "Edit my account", edit_user_registration_path, class: "button btn-tertiary" %>
     </div>
     <div class="col-10">
       <div class="sub_section my-3">
@@ -28,20 +28,17 @@
           <% else %>
             <% @pendings_bookings_as_owner.each do |booking| %>
               <div class="col-4">
-                <div class="card m-2 shadow">
+                <div class="card my-3 shadow">
                   <%= cl_image_tag booking.game.photos.first.key, class: 'card-img-top image-fit', height: 200, width: 300, crop: :fill  %>
                   <div class="card-body">
                     <h5 class="card-title fw-semibold"><%= booking.game.name %></h5>
-                    <p>From <%=booking.start_date %></p>
-                    <p>To <%=booking.end_date %></p>
                     <p>Booked by <%=booking.user.username %></p>
-                    <p><%= (booking.end_date - booking.start_date).to_i * booking.game.price_per_day %> €</p>
-
-
-                    <%= link_to "✅", accept_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"✅ Accept this reservation?"} , class: "link-hover mx-2 right" %>
-                    <%= link_to "❌", decline_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"❌ Decline this reservation ?"},  class: "link-hover mx-2 right " %>
-
-
+                    <p>From <%=booking.start_date %> to <%=booking.end_date %></p>
+                    <div class="d-flex align-items-center">
+                      <h5 class="me-auto"><strong><%= (booking.end_date - booking.start_date).to_i * booking.game.price_per_day %> € </strong></h5>
+                      <%= link_to "✅", accept_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"✅ Accept this reservation?"} , class: "link-hover mx-2 right" %>
+                      <%= link_to "❌", decline_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"❌ Decline this reservation ?"},  class: "link-hover mx-2 right " %>
+                   </div>
                   </div>
                 </div>
               </div>
@@ -57,7 +54,7 @@
           <% else %>
             <% @games.each do |game| %>
               <div class="col-4">
-                <div class="card my-2 shadow">
+                <div class="card my-3 shadow">
                   <%= cl_image_tag game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
                   <div class="card-body">
                     <h5 class="card-title fw-semibold"><%= game.name %></h5>
@@ -78,7 +75,7 @@
           <% else %>
             <% @bookings.each do |booking| %>
               <div class="col-4">
-                <div class="card my-2 shadow ">
+                <div class="card my-3 shadow ">
                   <%= cl_image_tag booking.game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
                   <div class="card-body">
                     <h5 class="card-title fw-semibold"><%= booking.game.name %></h5>
