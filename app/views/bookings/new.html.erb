@@ -9,7 +9,8 @@
       <i class="fa-solid fa-calendar-days" data-action="click->dynamic-booking-price#openCalendar"></i>
       <%= simple_form_for [@game, @booking], html: {
                             data: {
-                              controller: 'flatpickr'
+                              controller: 'flatpickr',
+                              flatpickr_dates_value: @game.flatpickr_booked_dates
                             }
                           } do |f| %>
         <%= f.input :start_date,

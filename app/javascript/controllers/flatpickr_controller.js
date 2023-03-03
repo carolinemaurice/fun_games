@@ -8,13 +8,24 @@ import rangePlugin from "flatpickr/dist/plugins/rangePlugin";
 export default class extends Controller {
   // retrieve the targets from the DOM
   static targets = [ 'startDateInput', 'endDateInput' ]
+  static values = { dates: Object }
 
-  // On controller's connection, call the flatpickr
-  // function in order to build the calendars
   connect() {
-    flatpickr(this.startDateInputTarget, {
+    this.#initFlatPickr()
+  }
+
+  #initFlatPickr() {
+    console.log(this.#options())
+    flatpickr(this.startDateInputTarget, this.#options());
+  }
+
+  #options() {
+    return {
+      ...this.datesValue,
+      enableTime: true,
+      minDate: new Date(),
       mode: 'range',
       "plugins": [new rangePlugin({ input: this.endDateInputTarget})]
-    })
+    }
   }
 }
