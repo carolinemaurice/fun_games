@@ -4,19 +4,19 @@
     <div class="mb-5">
         <%= render "games/search_form" %>
     </div>
-    <div style="width: 100%; height: 600px;"
+    <div class="mb-5" style="width: 100%; height: 600px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
 
     <% @games.each do |game| %>
-      <div class="col-3 my-5">
+      <div class="col-3 my-3">
         <div class="card my-2 ">
           <%= cl_image_tag game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
           <div class="card-body">
             <h5 class="card-title fw-semibold"><%= game.name %></h5>
-            <p class="card-text"> <%=game.description%> </p>
+            <p class="text-truncate"> <%=game.description%> </p>
             <%= link_to 'More details', game_path(game), class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
           </div>
         </div>

@@ -26,7 +26,7 @@
         <% if current_user == @game.user%>
           <% if @upcoming_bookings.empty? %>
             <div class="card-product">
-              <h6>You have not upcoming booking for now!</h6>
+              <h6>You have no upcoming bookings for now!</h6>
             </div>
           <% else %>
             <% @upcoming_bookings.each do |booking| %>
@@ -45,7 +45,7 @@
           <h1 class= "my-3 mt-5">Reservations history</h1>
           <% if @history_bookings.empty? %>
             <div class="card-product">
-              <h6>You have not booking activities for now!</h6>
+              <h6>You have no booking activities for now!</h6>
             </div>
           <% else %>
             <% @history_bookings.each do |booking| %>
