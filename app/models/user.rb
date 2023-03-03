@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :bookings
   has_many :games
+  has_many :bookings_as_owner, through: :games, source: :bookings
   has_one_attached :photo
 
   validates :first_name, :last_name, :username, :city, :street_number, :postal_code, :email, presence: true

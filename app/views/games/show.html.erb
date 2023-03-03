@@ -1,5 +1,4 @@
 <div class="container">
-  <div class="container">
     <div class="row">
       <div class="col-6 d-flex flex-column my-5">
         <%= cl_image_tag @game.photos[0].key, height: 300, width: 500, crop: :fill, class: "my-3"%>
@@ -20,12 +19,50 @@
           <%= link_to("Book this game",  new_game_booking_path(@game), class: "button btn-secondary") if @game.user != current_user %>
         </div>
       </div>
-
-      <div  class="col-6 d-flex flex-column my-5 p-5" style="width: 50%; height: 600px;"
-        data-controller="map"
-        data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
     </div>
-  </div>
+
+    <div class="col-6 d-flex flex-column">
+      <h1>Upcoming reservations</h1>
+      <% if current_user == @game.user%>
+        <% if @upcoming_bookings.empty? %>
+          <div class="card-product">
+            <h6>You have not upcoming booking for now!</h6>
+          </div>
+        <% else %>
+          <% @upcoming_bookings.each do |booking| %>
+            <div class="card-product">
+              <%= image_tag user_avatar(booking.user), class: 'avatar' %>
+              <div class="card-product-infos">
+                <p> Booked <%= (booking.end_date - booking.start_date).to_i %> days by <%=booking.user.username%></p>
+                <p> From <%= booking.start_date %> to <%= booking.end_date %></p>
+                <p><%=(booking.end_date - booking.start_date).to_i * booking.game.price_per_day %>€</p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <h1>Declined reservations</h1>
+        <% if @declined_bookings.empty? %>
+          <div class="card-product">
+            <h6>You have not declined booking for now!</h6>
+          </div>
+        <% else %>
+          <% @declined_bookings.each do |booking| %>
+            <div class="card-product">
+              <%= image_tag user_avatar(booking.user), class: 'avatar' %>
+              <div class="card-product-infos">
+                <p> Booked <%= (booking.end_date - booking.start_date).to_i %> days by <%=booking.user.username%></p>
+                <p> From <%= booking.start_date %> to <%= booking.end_date %></p>
+                <p><%=(booking.end_date - booking.start_date).to_i * booking.game.price_per_day %>€</p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <div  class="col-6 d-flex flex-column" style="width: 50%; height: 600px;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      <% end %>
+    </div>
 </div>

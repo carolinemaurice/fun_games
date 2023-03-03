@@ -8,6 +8,13 @@ class GamesController < ApplicationController
     else
       @games = policy_scope(Game)
     end
+    @markers = @games.map do |game|
+      {
+        lat: game.latitude,
+        lng: game.longitude,
+        info_window_html: render_to_string(partial: "games/info_window", locals: {game: game})
+      }
+    end
   end
 
   def show
@@ -16,6 +23,8 @@ class GamesController < ApplicationController
       lat: @game.latitude,
       lng: @game.longitude
     }]
+    @upcoming_bookings = @game.bookings.where(status: "Accepted")
+    @declined_bookings = @game.bookings.where(status: "Declined")
   end
 
   def new

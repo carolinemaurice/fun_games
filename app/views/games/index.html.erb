@@ -1,14 +1,20 @@
 <div class="container">
   <h1 class="text-center m-2 p-4 fw-bold">Discover all games</h1>
   <div class="row my-3">
-    <%= render "games/search_form", class: "w-2" %>
+    <%= render "games/search_form" %>
+    <div style="width: 100%; height: 600px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
+
     <% @games.each do |game| %>
       <div class="col-3 my-5">
         <div class="card my-2 ">
           <%= cl_image_tag game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
           <div class="card-body">
             <h5 class="card-title fw-semibold"><%= game.name %></h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text"><%=@game.description%></p>
             <%= link_to 'More details', game_path(game), class: 'btn  btn-outline-info d-flex text-center justify-content-center' %>
           </div>
         </div>
