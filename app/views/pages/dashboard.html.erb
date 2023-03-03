@@ -17,7 +17,7 @@
         <p><%= current_user.street_number %></p>
         <p><%= current_user.postal_code %> <%= current_user.city %></p>
       </div>
-      <%= link_to "Edit my account", edit_user_registration_path %>
+      <%= link_to "Edit my account", edit_user_registration_path, class: "button  btn-tertiary" %>
     </div>
 
     <div class="col-10">
@@ -40,6 +40,7 @@
                     <%= link_to "Decline", decline_booking_path(booking), data: {turbo_method: :patch} %>
                   </div>
                 </div>
+
               </div>
             <% end %>
           <% end %>
@@ -98,6 +99,27 @@
             <% end %>
           <% end %>
         </div>
+      </div>
+    </div>
+
+    <div class="sub_section">
+      <h3>My reservations</h3>
+      <div class="row">
+        <% @bookings.each do |booking| %>
+          <div class="col-3">
+            <div class="card m-2 ">
+              <%= cl_image_tag booking.game.photos.first.key, class: 'card-img-top image-fit', height: 300, width: 400, crop: :fill  %>
+              <div class="card-body">
+                <h5 class="card-title fw-semibold"><%= booking.game.name %></h5>
+                <p class="card-text"><strong>Owner's game : </strong> <%= booking.game.user.username %> </p>
+                <p class="card-text"><strong>Period of reservation : </strong></p>
+                <p class="card-text">From <%= booking.start_date %> to <%= booking.end_date %></p>
+                <p class="card-text"><strong>Status : </strong> <span class="status_pending"><%= booking.status %></span> </p>
+                <%= link_to 'Cancel my reservation', booking_path(booking), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'button  btn-outline-info d-flex text-center justify-content-center' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
 
