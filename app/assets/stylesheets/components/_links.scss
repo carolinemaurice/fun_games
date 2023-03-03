@@ -1,7 +1,21 @@
 .link-hover {
-color: rgb(139, 138, 138)
+color: rgb(139, 138, 138);
+text-decoration: none;
+text-align: right;
 }
 
 .link-hover:hover {
  color: #4800E2;
+}
+
+.link-accepted {
+color: green
+}
+
+.link-declined {
+color: red
+}
+
+.right {
+  text-align: right;
 }
