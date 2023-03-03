@@ -7,13 +7,13 @@
           <h3 class="text-center">Create your offers or book a game directly.</h3>
           <%= render "games/search_form" %>
           <% if user_signed_in? %>
-            <%=link_to "Let's start ! ", games_path, class: 'btn btn-info m-3'%>
+            <%=link_to "Let's start ! ", games_path, class: 'button btn-primary m-3'%>
           <% else %>
-            <%=link_to "Let's start ! ", new_user_session_path, class: 'btn btn-info m-3'%>
+            <%=link_to "Let's start ! ", new_user_session_path, class: 'button  btn-primary m-3'%>
           <% end %>
         </div>
         <div class="mt-3 col-12 m-2 d-flex flex-column justify-content-center align-items-center">
-          <%=link_to "Discover all games", games_path,  class:'btn btn-info my-5'%>
+          <%=link_to "Discover all games", games_path,  class:'button btn-primary my-5'%>
         </div>
         <h3> Have a look at the newest games !</h3>
         <div style="width: 100%; height: 600px;"
