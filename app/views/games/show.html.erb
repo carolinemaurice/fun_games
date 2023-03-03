@@ -32,27 +32,31 @@
           <% @upcoming_bookings.each do |booking| %>
             <div class="card-product">
               <%= image_tag user_avatar(booking.user), class: 'avatar' %>
-              <div class="card-product-infos">
+              <div class="card-product-infos position-relative">
+              <i class="fa-regular fa-circle-check booking-check"></i>
                 <p> Booked <%= (booking.end_date - booking.start_date).to_i %> days by <%=booking.user.username%></p>
                 <p> From <%= booking.start_date %> to <%= booking.end_date %></p>
                 <p><%=(booking.end_date - booking.start_date).to_i * booking.game.price_per_day %>€</p>
+                <p>Confirmed</p>
               </div>
             </div>
           <% end %>
         <% end %>
-        <h1>Declined reservations</h1>
-        <% if @declined_bookings.empty? %>
+        <h1>Reservations history</h1>
+        <% if @history_bookings.empty? %>
           <div class="card-product">
-            <h6>You have not declined booking for now!</h6>
+            <h6>You have not booking activities for now!</h6>
           </div>
         <% else %>
-          <% @declined_bookings.each do |booking| %>
+          <% @history_bookings.each do |booking| %>
             <div class="card-product">
               <%= image_tag user_avatar(booking.user), class: 'avatar' %>
-              <div class="card-product-infos">
+              <div class="card-product-infos position-relative">
+            <i class="fa-regular fa-circle-xmark booking-done"></i>
                 <p> Booked <%= (booking.end_date - booking.start_date).to_i %> days by <%=booking.user.username%></p>
                 <p> From <%= booking.start_date %> to <%= booking.end_date %></p>
                 <p><%=(booking.end_date - booking.start_date).to_i * booking.game.price_per_day %>€</p>
+                <p>Declined</p>
               </div>
             </div>
           <% end %>

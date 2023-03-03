@@ -19,7 +19,6 @@
       </div>
       <%= link_to "Edit my account", edit_user_registration_path, class: "button  btn-tertiary" %>
     </div>
-
     <div class="col-10">
       <div class="sub_section">
         <h3>Reservations requests</h3>
@@ -36,11 +35,11 @@
                     <p>From <%=booking.start_date %></p>
                     <p>To <%=booking.end_date %></p>
                     <p>Booked by <%=booking.user.username %></p>
-                    <%= link_to "Accept", accept_booking_path(booking), data: {turbo_method: :patch} %>
-                    <%= link_to "Decline", decline_booking_path(booking), data: {turbo_method: :patch} %>
+                    <p><%= (booking.end_date - booking.start_date).to_i * booking.game.price_per_day %> €</p>
+                    <%= link_to "Accept", accept_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"Accept this reservation?"} %>
+                    <%= link_to "Decline", decline_booking_path(booking), data: {turbo_method: :patch, turbo_confirm:"Decline this reservation ?"} %>
                   </div>
                 </div>
-
               </div>
             <% end %>
           <% end %>
