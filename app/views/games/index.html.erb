@@ -1,7 +1,9 @@
 <div class="container">
   <h1 class="text-center m-2 p-4 fw-bold">Discover all games</h1>
   <div class="row my-3">
-    <%= render "games/search_form" %>
+    <div class="mb-5">
+        <%= render "games/search_form" %>
+    </div>
     <div style="width: 100%; height: 600px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"

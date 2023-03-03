@@ -14,10 +14,11 @@
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <li class="nav-item">
-            <%= link_to("New Game", new_game_path, class: "nav-link") if policy(Game).new? %>
+          <li class="nav-item active">
+            <%= link_to "All Games", games_path, class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <%= link_to("New Game", new_game_path, class: "nav-link") if policy(Game).new? %>
           </li>
           <li class="nav-item dropdown">
             <% if current_user.photo.key %>
